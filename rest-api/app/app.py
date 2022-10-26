@@ -185,7 +185,8 @@ def lookup():
                 ),
                 404,
             )
-    except:
+    except Exception as e:
+        print(e)
         return (
             jsonify(
                 {

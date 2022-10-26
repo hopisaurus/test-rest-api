@@ -20,7 +20,10 @@ jobs:
       - uses: actions/checkout@v3
       - name: Set env vars for main builds
         run: |
-          echo "VERSION=$(cat ./rest-api/VERSION)" >> $GITHUB_ENV
+          cat rest-api/VERSION
+          ls -la rest-api
+          echo "VERSION=$(cat rest-api/VERSION)" >> $GITHUB_ENV
+          echo "VERSION=${VERSION}"
           echo "CUSTOM_IMAGE_NAME=${{ env.USER }}/${{ env.REPO }}:${VERSION}-${{ env.SHA }},${{ env.USER }}/${{ env.REPO }}:latest"  >> $GITHUB_ENV
 
       - name: Set up Docker Buildx

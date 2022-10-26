@@ -1,12 +1,12 @@
 name:  Reusable build and test
 
 on:
-  # Run this workflow manually from the Actions tab on Repo homepage
-  workflow_dispatch:
+  workflow_call:
 
 
 jobs:
   build-and-push:
+    name: Build and Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

@@ -1,6 +1,8 @@
 name: Reusable Publish
 
-
+on:
+  workflow_call:
+  
 jobs:
   publish:
     name: Package and Publish

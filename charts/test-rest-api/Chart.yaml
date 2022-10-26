@@ -1,6 +1,6 @@
 apiVersion: v2
 name: test-rest-api
-description: A Helm chart for Kubernetes
+description: test-rest-api to validate domains and ipv4 addresses
 
 # A chart can be either an 'application' or a 'library' chart.
 #

@@ -18,13 +18,13 @@ jobs:
       SHA: ${{ github.sha }}
     steps:
       - uses: actions/checkout@v3
+      - name: Get version
+        id: vars
+        run: echo ::set-output name=version::$(cat rest-api/VERSION)
       - name: Set env vars for main builds
         run: |
-          cat rest-api/VERSION
-          ls -la rest-api
-          echo "VERSION=$(cat rest-api/VERSION)" >> $GITHUB_ENV
-          echo "VERSION=${VERSION}"
-          echo "CUSTOM_IMAGE_NAME=${{ env.USER }}/${{ env.REPO }}:${VERSION}-${{ env.SHA }},${{ env.USER }}/${{ env.REPO }}:latest"  >> $GITHUB_ENV
+          echo "VERSION=${{ steps.vars.outputs.version }}"
+          echo "CUSTOM_IMAGE_NAME=${{ env.USER }}/${{ env.REPO }}:${{ steps.vars.outputs.version }}-${{ env.SHA }},${{ env.USER }}/${{ env.REPO }}:latest"  >> $GITHUB_ENV
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2

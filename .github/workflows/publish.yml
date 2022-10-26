@@ -21,6 +21,7 @@ jobs:
       - name: Get version
         id: vars
         run: echo "VERSION=$(cat rest-api/VERSION)" >> $GITHUB_ENV
+
       - name: Set env vars for main builds
         run: |
           echo "VERSION=${{ env.VERSION }}"
@@ -41,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ./rest-api/Dockerfile
+          file: ./Dockerfile
           push: true
           tags: ${{ env.CUSTOM_IMAGE_NAME }}
           cache-from: type=regisry,ref=${{ env.USER }}/${{ env.REPO }}:latest

@@ -1,18 +1,22 @@
 from app import app
 import pytest
 
+
 @pytest.fixture()
 def app():
     app = app()
-    app.config.update({
-        "TESTING": True,
-    })
+    app.config.update(
+        {
+            "TESTING": True,
+        }
+    )
 
     # other setup can go here
 
     yield app
 
     # clean up / reset resources here
+
 
 @pytest.fixture()
 def client(app):

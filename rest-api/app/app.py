@@ -17,13 +17,12 @@ from pathlib import Path
 # read in version file
 cwd = Path.cwd()
 mod_path = Path(__file__).parent
-rel_path = '../../VERSION'
+rel_path = "../../VERSION"
 VERSIONFILE = (mod_path / rel_path).resolve()
 try:
     app_version = open(VERSIONFILE, "rt").read()
 except EnvironmentError:
     pass
-
 
 
 # initialize logging to file

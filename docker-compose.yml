@@ -4,7 +4,7 @@ services:
   web:
     build: .
     volumes:
-      - ./rest-api:/var/server/
+      - ./:/var/server/
     ports:
       - 3000:3000
     env_file:

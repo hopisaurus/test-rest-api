@@ -21,9 +21,9 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo add nginx-stable https://helm.nginx.com/stable
 helm repo update
 
-helm install postgresql-release bitnami/postgresql -f ./charts/bitnami/postgres/values.yaml
+helm install postgresql-release bitnami/postgresql -f ./test-rest-api/postgresql-values.yaml
 
-helm install nginx-release -f nginx-ingress-values.yaml nginx-stable/nginx-ingress
+helm install nginx-release nginx-stable/nginx-ingress -f ./test-rest-api/nginx-ingress-values.yaml
 
 helm install test-rest-api-release test-rest-api/ -f ./test-rest-api/values.yaml
 ```

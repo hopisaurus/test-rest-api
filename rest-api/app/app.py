@@ -27,7 +27,7 @@ except EnvironmentError:
 
 
 # initialize logging to file
-logging.basicConfig(filename="access.log", level=logging.INFO)
+logging.basicConfig(filename="access.log", level=logging.DEBUG)
 
 app = Flask(__name__)
 

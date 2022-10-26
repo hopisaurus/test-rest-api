@@ -19,9 +19,9 @@ jobs:
     steps:
       - name: Set env vars for main builds
         run: |
-          ls -la
-          ls -la ./rest-api
-          echo "VERSION=$(cat ./rest-api/VERSION)" >> $GITHUB_ENV
+          ls -la ${{ GITHUB_WORKSPACE }}
+          ls -la ${{ GITHUB_WORKSPACE }}/rest-api
+          echo "VERSION=$(cat /rest-api/VERSION)" >> $GITHUB_ENV
           echo "CUSTOM_IMAGE_NAME=${{ env.USER }}/${{ env.REPO }}:${{ env.VERSION }}-${{ env.SHA }},${{ env.USER }}/${{ env.REPO }}:latest"  >> $GITHUB_ENV
 
       - name: Set up Docker Buildx

@@ -16,10 +16,12 @@ from prometheus_client import Counter, generate_latest
 # read in version file
 with open("VERSION") as f:
     app_version = f.read()
+
 # initialize logging to file
-# logging.basicConfig(filename='access.log', level=logging.INFO)
+logging.basicConfig(filename="access.log", level=logging.INFO)
 
 app = Flask(__name__)
+
 swagger_config = Swagger.DEFAULT_CONFIG
 swagger_config[
     "swagger_ui_bundle_js"
@@ -30,6 +32,7 @@ swagger_config[
 swagger_config["jquery_js"] = "//unpkg.com/jquery@2.2.4/dist/jquery.min.js"
 swagger_config["swagger_ui_css"] = "//unpkg.com/swagger-ui-dist@3/swagger-ui.css"
 swag = Swagger(app, config=swagger_config, template_file="swagger.json")
+
 
 # Connect to db
 def get_db_connection():
@@ -80,6 +83,7 @@ CONTENT_TYPE_LATEST = str("text/plain; version=0.0.4; charset=utf-8")
 hit_counter = Counter(
     "hit_counter", "A url request hit counter.", ["method", "endpoint"]
 )
+
 
 # check k8s
 def isk8s():

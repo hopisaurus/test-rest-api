@@ -17,11 +17,10 @@ jobs:
       USER: abost
       SHA: ${{ github.sha }}
     steps:
+      - uses: actions/checkout@v3
       - name: Set env vars for main builds
         run: |
-          ls -la ${GITHUB_WORKSPACE}
-          ls -la ${GITHUB_WORKSPACE}/rest-api
-          echo "VERSION=$(cat VERSION)" >> $GITHUB_ENV
+          echo "VERSION=$(cat ./rest-api/VERSION)" >> $GITHUB_ENV
           echo "CUSTOM_IMAGE_NAME=${{ env.USER }}/${{ env.REPO }}:${{ env.VERSION }}-${{ env.SHA }},${{ env.USER }}/${{ env.REPO }}:latest"  >> $GITHUB_ENV
 
       - name: Set up Docker Buildx

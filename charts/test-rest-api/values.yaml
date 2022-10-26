@@ -36,6 +36,9 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
+postgresql:
+    db_url: "postgres://rest-api:rest-api@postgresql-release.default.svc.cluster.local:5432/db"
+
 service:
   type: ClusterIP
   port: 3000

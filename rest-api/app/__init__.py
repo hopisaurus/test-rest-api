@@ -12,10 +12,19 @@ import validators
 import psycopg2
 from psycopg2.extras import DictCursor
 from prometheus_client import Counter, generate_latest
+from pathlib import Path
 
 # read in version file
-with open("VERSION") as f:
-    app_version = f.read()
+cwd = Path.cwd()
+mod_path = Path(__file__).parent
+rel_path = '../../VERSION'
+VERSIONFILE = (mod_path / rel_path).resolve()
+try:
+    app_version = open(VERSIONFILE, "rt").read()
+except EnvironmentError:
+    pass
+
+
 
 # initialize logging to file
 logging.basicConfig(filename="access.log", level=logging.INFO)

@@ -28,9 +28,9 @@ jobs:
           flake8 .
         continue-on-error: true
 
-      # - name: Test with pytest
-      #   run: |
-      #     pytest
+      - name: Test with pytest
+        run: |
+          pytest
 
 
 

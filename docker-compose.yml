@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./rest-api
+    volumes:
+      - ./rest-api:/var/server/
+    ports:
+      - 3000:3000
+    env_file:
+      - ./.env.dev
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+      # copy the sql scripts
+      - ./sql/:/docker-entrypoint-initdb.d/
+      - ./pg_hba.conf:/var/lib/foo/pg_hba.conf
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_USER=rest-api
+      - POSTGRES_PASSWORD=rest-api
+      - POSTGRES_DB=db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rest-api -d db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:

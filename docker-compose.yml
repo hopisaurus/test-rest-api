@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   web:
-    build: ./rest-api
+    build: .
     volumes:
       - ./rest-api:/var/server/
     ports:

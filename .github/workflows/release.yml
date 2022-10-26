@@ -32,7 +32,7 @@ jobs:
       
       - name: Helm Lint
         run: |
-          helm lint ./charts
+          helm lint ./charts/test-rest-api
 
       # - name: Run chart-releaser
       #   uses: helm/chart-releaser-action@v1.4.1

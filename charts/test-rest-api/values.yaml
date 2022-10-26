@@ -6,13 +6,13 @@ replicaCount: 1
 
 image:
   repository: abost/test-rest-api
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
-fullnameOverride: "test-rest-api-chart"
+fullnameOverride: "test-rest-api-release"
 
 serviceAccount:
   # Specifies whether a service account should be created

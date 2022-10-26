@@ -1,0 +1,38 @@
+name: Reusable Publish
+
+
+jobs:
+  publish:
+    name: Package and Publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set env vars for main builds
+        run: |
+          echo "VERSION=$(cat ./VERSION)" >> $GITHUB_ENV
+          echo "CUSTOM_IMAGE_NAME=${{ env.USER }}/${{ env.REPO }}:${{ env.VERSION }}-${{ env.SHA }},${{ env.USER }}/${{ env.REPO }}:latest"  >> $GITHUB_ENV
+
+      # - name: Set up Docker Context for Buildx
+      #   id: buildx-context
+      #   run: |
+      #     docker context create builders
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        with:
+          version: latest
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ env.CUSTOM_IMAGE_NAME }}
+          cache-from: type=regisry,ref=${{ env.USER }}/${{ env.REPO }}:latest
+          cache-to: type=inline

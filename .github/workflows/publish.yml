@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Set env vars for main builds
         run: |
+          ls -la
+          ls -la ./rest-api
           echo "VERSION=$(cat ./rest-api/VERSION)" >> $GITHUB_ENV
           echo "CUSTOM_IMAGE_NAME=${{ env.USER }}/${{ env.REPO }}:${{ env.VERSION }}-${{ env.SHA }},${{ env.USER }}/${{ env.REPO }}:latest"  >> $GITHUB_ENV
 
@@ -37,7 +39,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ./Dockerfile
+          file: ./rest-api/Dockerfile
           push: true
           tags: ${{ env.CUSTOM_IMAGE_NAME }}
           cache-from: type=regisry,ref=${{ env.USER }}/${{ env.REPO }}:latest

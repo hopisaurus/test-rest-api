@@ -17,5 +17,5 @@ RUN pip install --upgrade pip && pip install -r /tmp/requirements.txt
 
 COPY . /var/server
 
-CMD python /var/server/app/app.py
+CMD python /var/server/rest-api/app/app.py
 

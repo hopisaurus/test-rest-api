@@ -16,3 +16,9 @@ jobs:
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  helm_publish:
+    needs: package_publish
+    uses: ./.github/workflows/release.yml
+    secrets:
+      CR_TOKEN: ${{ secrets.GH_ACTIONS_ACCESS_TOKEN }}
